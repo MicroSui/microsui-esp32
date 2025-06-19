@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "sign.h"
+#include "microsui/sign.h"
 #include "constants.h"
 
 #include "freertos/FreeRTOS.h"
@@ -26,7 +26,7 @@ void app_main() {
 
 
     uint8_t sui_sig[97];
-    microsui_sign_offline(sui_sig, msg_hex, private_key);
+    microsui_sign_message(sui_sig, msg_hex, private_key);
 
     print_hex("\n\n\t Sui Signature", sui_sig, 97);
     printf("\n\n\t SIGNATURE must be sended to the Gateway to be broadcasted to the Sui Network...\n");
