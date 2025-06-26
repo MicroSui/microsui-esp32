@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-#include "sign.h"
+#include "microsui/sign.h"
+#include "microsui/utils.h"
 #include "constants.h"
 
 #include "freertos/FreeRTOS.h"
@@ -21,14 +22,18 @@ void app_main() {
 
     printf("\n\n\t\tGenerating Sign from Message!\n");
     vTaskDelay(pdMS_TO_TICKS(500));
-    printf("\n\tOriginal Message: %s", msg_hex);
+    printf("\n\tOriginal Message: %s\n", msg_hex);
     vTaskDelay(pdMS_TO_TICKS(1300));
 
-
+    // Generating the Sui Signature from the message and private key (private_key is in constant.h)
     uint8_t sui_sig[97];
-    microsui_sign_offline(sui_sig, msg_hex, private_key);
+    microsui_sign_message(sui_sig, msg_hex, private_key);
 
-    print_hex("\n\n\t Sui Signature", sui_sig, 97);
+    // Printing the Sui Signature in hex format
+    char sui_sig_hex[195]; // 2 hex chars per byte + null terminator
+    bytes_to_hex(sui_sig, 97, sui_sig_hex); // 97 bytes is the length of a Sui Signature
+    printf("\n\t Sui Signature (97 bytes): %s\n", sui_sig_hex);
+
     printf("\n\n\t SIGNATURE must be sended to the Gateway to be broadcasted to the Sui Network...\n");
 
     while (1) {
