@@ -34,7 +34,8 @@ Once you finish your project, compile and upload the firmware to the ESP32 by cl
 
 These are the available examples in this Hardware Implementation:
 
-- `offline_signature` – Obtain an Offline Sui Signature (from a hardcoded message in the code).
+- `signOfflineFromHexaPk` – Generate an offline Sui signature from a fixed message using a hexadecimal private key.
+- `signOfflineFromBech32Pk` – Generate an offline Sui signature from a fixed message using a Sui Bech32 private key.
 
 ## Notes:
 
